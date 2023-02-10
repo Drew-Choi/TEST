@@ -12,33 +12,27 @@ let str = "이 글은 도커에 대해 1도 모르는 시스템 관리자나 서
 // 자르고 난 다음 글자가 공백일 경우는 생략처리
 
 let BYTE = 0;
-let Textline = "";
-let Textline2 = "";
-let Textline3 = "";
-let Textline4 = "";
-//let str = "이 글은 ~~" <- 챕쳐가 짤려서 보이지 않지만, 테스트에서 제시하는 장문의 글이 위에 선언되어 있음
+let deCoding = "";
+let Result = [];
+let totalLen = 0;
+let pre = 0;
 
-for (let i = 0; i < str.length; i++) {
-    let Es = escape(str.charAt(i));
+for (let i = 0; i < str.length; i += 1) {
+     console.log(i)
+    let Char = escape(str.charAt(i));
 
-    Es.length > 4 ? BYTE += 2 : BYTE += 1;
+    Char.length > 4 ? BYTE += 2 : BYTE += 1;
 
-    if (BYTE <= 80) {
-      Textline += Es;
-    } else if (BYTE >= 81 && BYTE <= 160 ) {
-      Textline2 += Es;
-    } else if (BYTE >=161 && BYTE <= 240) {
-      Textline3 += Es;
-    } else if (BYTE >=241 && BYTE <= 320) {
-      Textline4 += Es;
+    if (BYTE >= 80 ) {
+     
+      Result.push(str.substring(pre, i).trim());
+      pre += i - pre;
+     
+      
+
+     BYTE = 0;
     }
-};
+  }
 
-let Decoding1 = unescape(Textline);
-let Decoding2 = unescape(Textline2);
-let Decoding3 = unescape(Textline3);
-let Decoding4 = unescape(Textline4);
-
-let ResultByteCutArray = [Decoding1, Decoding2, Decoding3, Decoding4];
-
-console.log(ResultByteCutArray);
+  console.log(Result);
+  
