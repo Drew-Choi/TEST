@@ -10,10 +10,21 @@ let str = "이 글은 도커에 대해 1도 모르는 시스템 관리자나 서
 // 자르고 난 다음 글자가 공백일 경우는 생략처리
 
 let BYTE = 0;
+let preTextLen = 0;
+let Result = [];
 
 for (let i = 0; i < str.length; i += 1) {
   let char = str.charAt(i);
-  const exKorean = /[ㄱ-ㅎㅏ-ㅣ가-핳]/gm;
+  const exKorean = /[ㄱ-ㅎㅏ-ㅣ가-힣]/gm;
   exKorean.test(char) ? BYTE += 2 : BYTE += 1;
-  console.log(BYTE); 
+  if (BYTE >= 80) {
+    Result.push(str.slice(preTextLen, i).trim());
+    preTextLen += i - preTextLen;
+    BYTE = 0;
+  }
 }
+
+Result.push(str.slice(preTextLen - str.length));
+
+console.log(Result);
+
