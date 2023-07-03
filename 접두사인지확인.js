@@ -9,4 +9,4 @@ function solution(my_string, is_prefix) {
   return +my_string.startsWith(is_prefix);
 }
 
-// startWith()로 시작하는 글짜가 일치하는지 확인
+// startsWith()로 시작하는 글짜가 일치하는지 확인
