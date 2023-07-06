@@ -13,4 +13,9 @@ function solution(n) {
   return answer;
 }
 
-console.log(solution(10));
+// console.log(solution(10));
+
+
+const arr = [1,2,3,4,5,15,50]
+
+console.log(String(arr[4]).includes('5'));
