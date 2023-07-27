@@ -5,11 +5,37 @@
 function solution(arr) {
   let answer = [];
 
-  for(let i = 0; i < arr.length; i += 1) {
-    console.log(i);
+  let i = 2;
+  while(( i - arr.length) < 0) {
+   i *= 2;
   }
 
-  return answer;
+  if(i >= arr.length) {
+    for(let x = 0; x < i; x += 1) {
+      if(arr[x] !== null && arr[x] !== undefined ){
+        answer.push(arr[x])
+      } else {
+        answer.push(0)
+      }
+    }
+ }
+
+ return answer;
 }
 
-console.log(solution([1, 2, 3, 4, 5, 6]));
+let copy = Array(999).fill(1)
+console.log(solution(copy));
+
+function solution(arr) {
+  const pow2 = [0, 2, 4, 8, 16, 32, 64, 128, 256, 512]
+  const arrLen = arr.length
+  let idx
+  for(let i = 0 ; i < pow2.length ; i ++) {
+      if(arrLen < pow2[i]) break
+      idx = pow2[i]
+  }
+  
+  const zeroArr = Array(idx).fill(0)
+  
+  return [...arr, ...zeroArr.slice(0, idx-arrLen)]
+}
